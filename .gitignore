@@ -68,3 +68,8 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+# Webstorm files
+.idea/
+.idea-error.log
+.idea
