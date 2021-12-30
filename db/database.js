@@ -12,15 +12,22 @@ class Database {
         this._data = JSON.parse(await readFile(this.dbFileName, 'utf-8'))
     }
 
-    async createDatabase(obj) {
+    createDatabase(obj) {
         this._data.push({
             id: uuid(),
             ...obj});
-        await writeFile(this.dbFileName, JSON.stringify(this._data), 'utf-8');
+        writeFile(this.dbFileName, JSON.stringify(this._data), 'utf-8');
     }
 
     readDatabase(obj) {
         return this._data
+    }
+
+    updateDatabase(id, newObj) {
+        this._data = this._data.map((obj) => (
+            obj.id === id ? {...obj, ...newObj,} : obj
+        ));
+        writeFile(this.dbFileName, JSON.stringify(this._data), 'utf-8');
     }
 }
 

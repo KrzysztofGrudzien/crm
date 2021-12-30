@@ -14,7 +14,13 @@ app.set('view engine', '.hbs');
 app.use('/client', clientRouter);
 app.use('/', homeRouter);
 app.get('/test', (req, res) => {
-    res.json(database.readDatabase())
+   database.updateDatabase(
+       'ef7f3325-1333-4adc-a5d2-3c32aca3e2d9',
+       {
+       name: 'Krzysztof2',
+       email: 'test@example.com.pl'
+   })
+    res.send('ok')
 })
 
 app.listen(3000, 'localhost', () => {
