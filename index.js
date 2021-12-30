@@ -14,12 +14,9 @@ app.set('view engine', '.hbs');
 app.use('/client', clientRouter);
 app.use('/', homeRouter);
 app.get('/test', (req, res) => {
-    database.createDatabase({
-        name: "Krzysztof",
-        email: "test@example.com"
-    })
-    res.send('ok')
+    res.json(database.readDatabase())
 })
+
 app.listen(3000, 'localhost', () => {
     console.log('Listening on port 3000')
 });

@@ -18,6 +18,10 @@ class Database {
             ...obj});
         await writeFile(this.dbFileName, JSON.stringify(this._data), 'utf-8');
     }
+
+    readDatabase(obj) {
+        return this._data
+    }
 }
 
 const database = new Database('client.json');
