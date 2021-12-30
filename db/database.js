@@ -29,6 +29,11 @@ class Database {
         ));
         writeFile(this.dbFileName, JSON.stringify(this._data), 'utf-8');
     }
+
+    deleteDatabaseUser(id) {
+        this._data = this._data.filter((obj) => (obj.id !== id))
+        writeFile(this.dbFileName, JSON.stringify(this._data), 'utf-8');
+    }
 }
 
 const database = new Database('client.json');
