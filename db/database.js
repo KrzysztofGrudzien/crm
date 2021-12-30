@@ -5,43 +5,47 @@ const {v4: uuid} = require('uuid');
 class Database {
     constructor(dbFileName) {
         this.dbFileName = join(__dirname, '../data', dbFileName);
-        this._loadDatabase();
+        this._loadDB();
     }
 
-    async _loadDatabase() {
+    async _loadDB() {
         this._data = JSON.parse(await readFile(this.dbFileName, 'utf-8'))
     }
 
-    _saveDatabase() {
+    _saveDB() {
         writeFile(this.dbFileName, JSON.stringify(this._data), 'utf-8');
     }
 
-    createDatabase(obj) {
+    createDB(obj) {
         this._data.push({
             id: uuid(),
             ...obj});
-        this._saveDatabase();
+        this._saveDB();
     }
 
-    readDatabase(obj) {
+    readAllClients(obj) {
         return this._data
     }
 
-    updateDatabase(id, newObj) {
+    readOneClient(id) {
+        return this._data.find(obj => obj.id === id)
+    }
+
+    updateDB(id, newObj) {
         this._data = this._data.map((obj) => (
             obj.id === id ? {...obj, ...newObj,} : obj
         ));
-        this._saveDatabase();
+        this._saveDB();
     }
 
-    deleteDatabaseUser(id) {
+    deleteOneClient(id) {
         this._data = this._data.filter((obj) => (obj.id !== id))
-        this._saveDatabase();
+        this._saveDB();
     }
 }
 
-const database = new Database('client.json');
+const clientsDB = new Database('client.json');
 
 module.exports = {
-    database,
+    clientsDB,
 }
