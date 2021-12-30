@@ -15,8 +15,8 @@ app.use('/client', clientRouter);
 app.use('/', homeRouter);
 app.get('/test', (req, res) => {
     database.createDatabase({
-        id: "2",
-        name: "Anna"
+        name: "Krzysztof",
+        email: "test@example.com"
     })
     res.send('ok')
 })
